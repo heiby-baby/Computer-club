@@ -6,7 +6,21 @@
 // Why? A person cannot leave the club due to a huge queue if they haven't entered the club in the first place.
 
 
+bool checktCorrectSring(const std::string& str) {
+    for (char ch : str) {
+        if (!((ch >= 'a' && ch <= 'z') || 
+              (ch >= '0' && ch <= '9') ||
+              ch == '_' ||              
+              ch == '-'||
+              ch == ' ')) {              
+            return false;
+        }
+    }
+    return true; // Все символы допустимы
+}
+
 bool loadInput(string filename) {
+    //input file
     ifstream infile(filename);
     if (!infile) {
         cerr << "Failed to open file: " << filename << endl;
@@ -14,35 +28,55 @@ bool loadInput(string filename) {
     }
 
     string fileline{};
-    if (!getline(infile, fileline) || !isdigit(fileline[0])) {
-        cout << "Invalid input format at line 1" << endl;
+    if (!getline(infile, fileline) || !checktCorrectSring(fileline)) {
+        cout << "Invalid input format at line 1 " << "\"" << fileline << "\"" << endl;
         return false;
     }
     tableCount = std::stoi(fileline);
-
     tables.resize(tableCount);
     for (int i = 0; i < tableCount; ++i) {
         tables[i].ID = i + 1;
     }
+
     if (!getline(infile, fileline)) {
-        cout << "Invalid input format at line 2" << endl;
+        cout << "Invalid input format at line 2 " << endl;
         return false;
     }
-    std::istringstream sstream(fileline);
-    string time;
-    sstream >> time;
-    startTime = timeParserHHMMtoM(time);
-    sstream >> time;
-    endTime = timeParserHHMMtoM(time);
 
-    if (!getline(infile, fileline) || !isdigit(fileline[0])) {
-        cout << "Invalid input format at line 3" << endl;
+    bool isValidFormat =
+        checktCorrectSring(fileline.substr(0, 2)) &&
+        fileline[2] == ':' &&
+        checktCorrectSring(fileline.substr(3, 2)) &&
+        fileline[5] == ' ' &&
+        checktCorrectSring(fileline.substr(6, 2)) &&
+        fileline[8] == ':' &&
+        checktCorrectSring(fileline.substr(9, 2)) && 
+        fileline.size() == 11;
+
+    if (!isValidFormat) {
+        cout << "Invalid input format at line 2: \"" << fileline << "\"" << endl;
+        return false;
+    }
+
+    std::istringstream sstream(fileline);
+    string sTime, eTime;
+    sstream >> sTime >> eTime;
+    startTime = timeParserHHMMtoM(sTime);
+    endTime = timeParserHHMMtoM(eTime);
+
+
+    if (!getline(infile, fileline) || !checktCorrectSring(fileline)) {
+        cout << "Invalid input format at line 3: " << "\"" << fileline << "\"" <<  endl;
         return false;
     }
     cost = stoi(fileline);
 
     int lineNumber = 4;
     while (getline(infile, fileline)) {
+        if(!checktCorrectSring(fileline)){
+            cout << "Invalid input format at line " << lineNumber  << ": \"" << fileline << "\"" << endl;
+            return false;
+        }
         istringstream eventStream(fileline);
         string time;
         int id;
@@ -50,9 +84,9 @@ bool loadInput(string filename) {
             cout << "Invalid input format at line " << lineNumber << endl;
             return false;
         }
+
         vector<string> details;
         string detail;
-        int index = 0;
         while (eventStream >> detail) {
             details.push_back(detail);
         }
