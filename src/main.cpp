@@ -12,7 +12,8 @@ bool checktCorrectSring(const std::string& str) {
               (ch >= '0' && ch <= '9') ||
               ch == '_' ||              
               ch == '-'||
-              ch == ' ')) {              
+              ch == ' '||
+              ch == ':')) {              
             return false;
         }
     }
