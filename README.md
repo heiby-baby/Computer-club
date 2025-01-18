@@ -1,7 +1,8 @@
-# Computer-Club (oop version)
+# Computer-Club
 
 ## Структура проекта выглядит так
 
+```
     Computer Club/
     ├── src/                - # Исходный код
     │    ├── main.cpp       - # Точка входа в программу
@@ -12,20 +13,37 @@
     │   ├── GameClub.h      - # Файл, содержащий основные структуры, глобальные переменные и определения
     │   └── timeUtils.h     - # Интерфейс модуля для работы с временем
     └── data/               - # Каталог, в котором находиться тестовый файл для работы программы 
+        └── test_file.txt   - # Файл в котором записаны события
+```
 
 ## Для скачивания программы
 
-    git clone https://github.com/heiby-baby/Computer-club
+```powershell
+git clone https://github.com/heiby-baby/Computer-club
+```
 
 ## Cборка и запуск
 
-### *Через g++*
+### *Сборка через cmake*
 
-#### *Для сборки основной программы*
-
-    mkdir build
-    g++ -o ".\build\CompClub.exe" .\src\GameClub.cpp .\src\main.cpp .\src\timeUtils.cpp -Iinclude
+```powershell
+mkdir build
+cd build
+cmake ..
+cmake --build .
+```
 
 #### *Для запуска программы*
 
-    .\build\ComputerClub.exe .\data\test_file.txt
+```powershell
+cd debug
+.\main.exe .\<имя вашего файла>.txt
+```
+
+#### *Для запуска тестов*
+
+```powerchell
+ctest
+```
+
+
