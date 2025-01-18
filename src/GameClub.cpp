@@ -34,14 +34,8 @@ void GameClub::eventClubClose() {
 	}
 }
 
-void GameClub::eventHandle(const Event& event) {
-
-    cout << timeParserMtoHHMM(event.time) << " " << event.ID;
-    for (const auto& detail : event.details) cout << " " << detail;
-    cout << endl;
-
-    if (event.ID == 1) {
-        if (event.time < startTime) {
+void GameClub::eventID1(const Event& event){
+    if (event.time < startTime) {
             cout << timeParserMtoHHMM(event.time) << " " << "13" << " " << "NotOpenYet" << endl;
             return;
         }
@@ -52,15 +46,10 @@ void GameClub::eventHandle(const Event& event) {
             cout << timeParserMtoHHMM(event.time) << " " << "13" << " " << "YouShallNotPass" << endl;
             return;
         }
-    }
+}
 
-    else if (clients.find(event.details[0]) == clients.end()) {
-        cout << timeParserMtoHHMM(event.time) << " " << "13" << " " << "ClientUnknown" << endl;
-        return;
-    }
-
-    else if (event.ID == 2) {
-        Client* cl = &clients[event.details[0]];
+void GameClub::eventID2(const Event& event) {
+    Client* cl = &clients[event.details[0]];
         if (cl->tableID == -1) {
             if (tables[stoi(event.details[1]) - 1].busy == false) {
                 cl->sessionStart = event.time;
@@ -91,10 +80,11 @@ void GameClub::eventHandle(const Event& event) {
                 cout << timeParserMtoHHMM(event.time) << " " << "13" << " " << "PlaceIsBusy" << endl;
                 return;
             }
-        }
     }
-    else if (event.ID == 3) {
-        for (int i = 0; i < tables.size(); i++) {
+}
+
+void GameClub::eventID3(const Event& event){
+    for (int i = 0; i < tables.size(); i++) {
             if (tables[i].busy == false) {
                 cout << timeParserMtoHHMM(event.time) << " " << "13" << " " << "ICanWaitNoLonger!" << endl;
                 return;
@@ -111,9 +101,10 @@ void GameClub::eventHandle(const Event& event) {
             }
 
         }
-    }
-    else if (event.ID == 4) {
-        Client* cl = &clients[event.details[0]];
+}
+
+void GameClub::eventID4(const Event& event){
+     Client* cl = &clients[event.details[0]];
         if (cl->tableID == -1) {
             cout << timeParserMtoHHMM(event.time) << " " << "13" << " " << "ClientUnknown" << endl;
             return;
@@ -137,6 +128,31 @@ void GameClub::eventHandle(const Event& event) {
             clients.erase(cl->name);
             return;
         }
+}
+
+void GameClub::eventHandle(const Event& event) {
+
+    cout << timeParserMtoHHMM(event.time) << " " << event.ID;
+    for (const auto& detail : event.details) cout << " " << detail;
+    cout << endl;
+
+    if (event.ID == 1) {
+        eventID1(event);
+    }
+
+    else if (clients.find(event.details[0]) == clients.end()) {
+        cout << timeParserMtoHHMM(event.time) << " " << "13" << " " << "ClientUnknown" << endl;
+        return;
+    }
+
+    else if (event.ID == 2) {
+        eventID2(event);
+    }
+    else if (event.ID == 3) {
+        eventID3(event);
+    }
+    else if (event.ID == 4) {
+        eventID4(event);
     }
     else {
         cerr << "Unknown event ID: " << event.ID << endl;

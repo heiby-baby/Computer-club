@@ -12,13 +12,15 @@ private:
 	string filename;
 	bool checktCorrectSring(const std::string& str);
     bool loadInput(string);
-    void eventHandle(const Event&);
     void eventClubClose();
-
+    void eventHandle(const Event&);
+	void eventID1(const Event&);
+	void eventID2(const Event&);
+	void eventID3(const Event&);
+	void eventID4(const Event&);
 
 public:
      GameClub(const string filename);
      void start();
-
 };
 
