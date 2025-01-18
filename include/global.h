@@ -27,18 +27,13 @@ struct Event {
     int ID = -1;
     vector<string> details;
 
+    friend ostream& operator<<(ostream& os, const Event& event) {
+        os << "Time: " << event.time << ", Event ID: " << event.ID << ", Details: ";
+        for (auto& i : event.details) {
+            cout << i << " ";
+        }
+        return os;
+    }
 };
 
-ostream& operator<<(ostream& os, const Event& event) {
-    os << "Time: " << event.time << ", Event ID: " << event.ID << ", Details: ";
-    for (auto& i : event.details) {
-        cout << i << " ";
-    }
-    return os;
-}
 
-int tableCount, startTime, endTime, cost;
-vector<Table> tables;
-vector<Event> events;
-map<string, Client> clients;
-queue<Client> waitingClients;
