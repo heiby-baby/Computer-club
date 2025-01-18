@@ -68,7 +68,7 @@ g++ -o ".\build\test_timeUtils.exe" .\tests\test_timeUtils.cpp .\src\timeUtils.c
 #### *Для запуска программы*
 
 ```powershell
-.\build\main.exe .\data\test_file.txt
+.\build\ComputerClub.exe .\data\test_file.txt
 ```
 
 #### *Для запуска тестов*
