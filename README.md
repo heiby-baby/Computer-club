@@ -24,7 +24,7 @@ git clone https://github.com/heiby-baby/Computer-club
 
 ## Cборка и запуск
 
-#### *Сборка через cmake*
+### *Сборка через cmake*
 
 ```powershell
 mkdir build
@@ -49,7 +49,7 @@ cd debug
 
 #### 
 
-#### *Через g++*
+### *Через g++*
 
 #### *Для сборки основной программы*
 
