@@ -24,6 +24,7 @@ void GameClub::start() {
 	 }
  }
 
+//Выводит имена людей в алфавитном порядке, которые остались в клубе после закрытия
 void GameClub::eventClubClose() {
 	for (auto it = clients.begin(); it != clients.end(); ) {
 		tables[it->second.tableID - 1].busy = false;

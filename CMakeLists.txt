@@ -14,6 +14,14 @@ set(SOURCES
 
 add_executable(CompClub ${SOURCES})
 
+# Копирование файлов из data в папку debug
+add_custom_command(
+    TARGET CompClub POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/data
+    $<TARGET_FILE_DIR:CompClub>/data
+)
+
 include(FetchContent)
 FetchContent_Declare(
   googletest

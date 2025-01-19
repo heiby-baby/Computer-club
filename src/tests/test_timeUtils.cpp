@@ -14,7 +14,9 @@ TEST(TimeUtilsTest, TimeParserMtoHHMM) {
 }
 
 TEST(TimeUtilsTest, RoundToNearestHour) {
-    EXPECT_EQ(roundToNearestHour(754), 780);  // 13:00
-    EXPECT_EQ(roundToNearestHour(0), 0);      // 00:00
-    EXPECT_EQ(roundToNearestHour(1439), 1440); // 24:00
+    EXPECT_EQ(roundToNearestHour(754), 780);  
+    EXPECT_EQ(roundToNearestHour(0), 0);      
+    EXPECT_EQ(roundToNearestHour(1439), 1440); 
 }
+
+
