@@ -1,19 +1,31 @@
 #include "timeUtils.h"
-
 // Format HH:MM to Minutes
 int timeParserHHMMtoM(const string& line) {
-    int hours = (((int(line[0]) - int('0')) * 10) + (int(line[1]) - int('0')));
-    int minuts = (((int(line[3]) - int('0')) * 10) + (int(line[4]) - int('0')));
-    return hours * 60 + minuts;
-}
-// Minutes to HH:MM format
-string timeParserMtoHHMM(int minutes) {
-    int hours = minutes / 60;
-    int minut = minutes % 60;
-    return (hours < 10 ? "0" : "") + to_string(hours) + ":" + (minut < 10 ? "0" : "") + to_string(minut);
+    if (line.size() != 5 || line[2] != ':') {
+        throw std::invalid_argument("Invalid time format.");
+    }
+
+    int hours = (line[0] - '0') * 10 + (line[1] - '0');
+    int minutes = (line[3] - '0') * 10 + (line[4] - '0');
+    
+    if (hours < 0 || hours >= 24 || minutes < 0 || minutes >= 60) {
+        throw std::invalid_argument("Invalid time values.");
+    }
+
+    return hours * 60 + minutes;
 }
 
-// Rounds up the given time in minutes to the nearest hour
+// Minutes to HH:MM format
+string timeParserMtoHHMM(int minutes) {
+    if (minutes < 0 || minutes >= 24 * 60) {
+        throw std::invalid_argument("Invalid minutes value. Must be between 0 and 1439.");
+    }
+
+    int hours = minutes / 60;
+    int mins = minutes % 60;
+    return (hours < 10 ? "0" : "") + to_string(hours) + ":" + (mins < 10 ? "0" : "") + to_string(mins);
+}
+
 int roundToNearestHour(int minutes) {
     if (minutes % 60 == 0) {
         return minutes;

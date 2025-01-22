@@ -32,15 +32,19 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(
-  test_timeUtils
+# Тесты
+# Указываем список тестовых файлов
+set(TEST_SOURCES
     src/tests/test_timeUtils.cpp
-    src/timeUtils.cpp
+    src/tests/test_gameClub.cpp
 )
+
+add_executable(test ${TEST_SOURCES} src/timeUtils.cpp src/GameClub.cpp)
+
 target_link_libraries(
-  test_timeUtils
+  test
   GTest::gtest_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(test_timeUtils)
+gtest_discover_tests(test)
