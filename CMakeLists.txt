@@ -39,12 +39,12 @@ set(TEST_SOURCES
     src/tests/test_gameClub.cpp
 )
 
-add_executable(test ${TEST_SOURCES} src/timeUtils.cpp src/GameClub.cpp)
+add_executable(unit_test ${TEST_SOURCES} src/timeUtils.cpp src/GameClub.cpp)
 
 target_link_libraries(
-  test
+  unit_test
   GTest::gtest_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(test)
+gtest_discover_tests(unit_test)

@@ -299,6 +299,7 @@ inline bool GameClub::isDigitsOnly(const string& input)
     return true;
 }
 
+
 // Для проверкии ввода событий
 // ^\d{2}:\d{2} \d+ [a-z0-9_-]+ \d+$ ))
 inline  bool GameClub::isEventValidFormat(const string& str)
@@ -326,7 +327,7 @@ inline  bool GameClub::isEventValidFormat(const string& str)
     // Проверка пробела между айди события и именем клиента
     if (i >= len || str[i] != ' ')
         return false;
-    i++; 
+    i++;
 
     if (i >= len || !(islower(str[i]) || isdigit(str[i]) || str[i] == '-' || str[i] == '_'))
         return false;
@@ -334,7 +335,7 @@ inline  bool GameClub::isEventValidFormat(const string& str)
     while (i < len && (islower(str[i]) || isdigit(str[i]) || str[i] == '-' || str[i] == '_'))
         i++;
 
-    if (i >= len || str[i] != ' ')
+    if (str[i] != ' ')
         return i == len;
     i++;
 

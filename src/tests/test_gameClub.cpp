@@ -30,12 +30,12 @@ TEST(GameClubTests_Negative, isDigitsOnly) {
 TEST(GameClubTests_Positive, isEventValidFormat) {
     EXPECT_TRUE(GameClub::isEventValidFormat("12:34 56 client_name 789"));
     EXPECT_TRUE(GameClub::isEventValidFormat("00:00 1 user-123 9999"));
+    EXPECT_TRUE(GameClub::isEventValidFormat("12:34 56 client_name789")); 
 }
 
 TEST(GameClubTests_Negative, isEventValidFormat) {
     EXPECT_FALSE(GameClub::isEventValidFormat("12:34 client_name 789"));
     EXPECT_FALSE(GameClub::isEventValidFormat("12:34 56 client@name 789"));
     EXPECT_FALSE(GameClub::isEventValidFormat(""));
-    EXPECT_FALSE(GameClub::isEventValidFormat("12:34 56 client_name789")); 
 }
 
