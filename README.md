@@ -38,18 +38,29 @@ cmake --build .
 
 #### *Для запуска программы*
 
+#####Windows
+
 ```powershell
 cd debug
-.\main.exe .\<имя вашего файла>.txt
+.\CompCLub.exe .\<имя вашего файла>.txt
+```
+пример 
+```powershell
+cd debug
+.\CompClub.exe .\data\test_file.txt
+```
+#####Linux
+```bash
+./CompClub <имя вашего файла>.txt
 ```
 пример
-```powershell
-cd debug
-.\main.exe .\data\test_file.txt
+```bash
+./CompClub data/test_file.txt
 ```
+
 #### *Для запуска тестов*
 
-```powerchell
+```
 ctest
 ```
 
